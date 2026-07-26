@@ -4,12 +4,14 @@ module(
     # use compatibility_level to indicate breaking compatibility
 )
 
+bazel_dep(name = "rules_cc", version = "0.0.2")
+
 # This demo uses Boost.Rational.
-bazel_dep(name = "boost.rational", version = "1.83.0.bzl.1")
+bazel_dep(name = "boost.rational", version = "1.83.0.bcr.4")
 
 # Test frameworks that can be used:
-bazel_dep(name = "googletest", version = "1.14.0")
-bazel_dep(name = "boost.test", version = "1.83.0.bzl.4")
+bazel_dep(name = "googletest", version = "1.17.0.bcr.2")
+bazel_dep(name = "boost.test", version = "1.90.0.bcr.1")
 
 # Run clang-tidy, with `bazel ... --config clang-tidy`.
 # clang-tidy requires access to included files, so it is most useful to treat
@@ -23,4 +25,4 @@ bazel_dep(name = "bazel_clang_tidy", version = "")
 git_override(
     module_name="bazel_clang_tidy",
     remote="https://github.com/erenon/bazel_clang_tidy.git",
-    commit='bff5c59c843221b05ef0e37cef089ecc9d24e7da')
+    commit='c4d35e0d0b838309358e57a2efed831780')
