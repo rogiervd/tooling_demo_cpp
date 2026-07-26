@@ -4,10 +4,10 @@ module(
     # use compatibility_level to indicate breaking compatibility
 )
 
-bazel_dep(name = "rules_cc", version = "0.0.2")
+bazel_dep(name = "rules_cc", version = "0.2.22")
 
 # This demo uses Boost.Rational.
-bazel_dep(name = "boost.rational", version = "1.83.0.bcr.4")
+bazel_dep(name = "boost.rational", version = "1.90.0.bcr.1")
 
 # Test frameworks that can be used:
 bazel_dep(name = "googletest", version = "1.17.0.bcr.2")
