@@ -12,7 +12,7 @@ jobs:
   coverage:
     # Any differences between coverage on different operating systems are
     # probably minor.
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-26.04
         
     steps:
     - uses: actions/checkout@v7

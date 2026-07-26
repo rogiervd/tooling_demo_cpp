@@ -12,7 +12,7 @@ on:
 
 jobs:
   test-sanitizers:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-26.04
     strategy:
       matrix:
         sanitizer: [ asan, ubsan ]
