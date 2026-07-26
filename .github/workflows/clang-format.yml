@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-22.04
         
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v7
     - name: Check formatting
       shell: bash
       # This should show incorrectly formatted code, and return with a nonzero

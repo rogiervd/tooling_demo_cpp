@@ -16,7 +16,7 @@ jobs:
         os: [ ubuntu-20.04, ubuntu-22.04, macos-13 ]
         
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v7
     - uses: bazel-contrib/setup-bazel@0.8.1
       with:
         # Avoid downloading Bazel every time.
