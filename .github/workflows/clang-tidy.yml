@@ -10,7 +10,7 @@ on:
 
 jobs:
   clang-tidy:
-    # clang-tidy might behave slightly differently on difference operating
+    # clang-tidy might behave slightly differently on different operating
     # systems, but hopefully using a recent Ubuntu will make it cover a fair
     # amount.
     runs-on: ubuntu-26.04
