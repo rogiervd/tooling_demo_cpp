@@ -29,7 +29,8 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y build-essential
-    - run: bazel build //... --config clang-tidy
+    - run: |
+        bazel build //... --config clang-tidy --spawn_strategy=standalone
       env:
         C_INCLUDE_PATH: "/usr/include/x86_64-linux-gnu:/usr/include"
         CPLUS_INCLUDE_PATH: "/usr/include/x86_64-linux-gnu:/usr/include"
