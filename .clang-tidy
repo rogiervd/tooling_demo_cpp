@@ -19,6 +19,7 @@ Checks: >
     mpi-*,
     performance-*,
     portability-*,
+    -portability-avoid-pragma-once,
     readability-*,
     -modernize-use-trailing-return-type,
     -llvm-header-guard,

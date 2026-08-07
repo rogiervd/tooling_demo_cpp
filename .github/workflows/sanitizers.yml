@@ -12,14 +12,14 @@ on:
 
 jobs:
   test-sanitizers:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-26.04
     strategy:
       matrix:
         sanitizer: [ asan, ubsan ]
         
     steps:
-    - uses: actions/checkout@v4
-    - uses: bazel-contrib/setup-bazel@0.8.1
+    - uses: actions/checkout@v7
+    - uses: bazel-contrib/setup-bazel@0.19.0
       with:
         # Avoid downloading Bazel every time.
         bazelisk-cache: true

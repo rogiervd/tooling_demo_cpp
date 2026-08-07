@@ -13,11 +13,12 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ ubuntu-20.04, ubuntu-22.04, macos-13 ]
+        os: [ ubuntu-24.04, ubuntu-26.04, macos-13 ]
+        compiler: [gcc, clang]
         
     steps:
-    - uses: actions/checkout@v4
-    - uses: bazel-contrib/setup-bazel@0.8.1
+    - uses: actions/checkout@v7
+    - uses: bazel-contrib/setup-bazel@0.19.0
       with:
         # Avoid downloading Bazel every time.
         bazelisk-cache: true
@@ -25,4 +26,4 @@ jobs:
         disk-cache: ${{ github.workflow }}
         # Share repository cache between workflows.
         repository-cache: true
-    - run: bazel test //test:all
+    - run: bazel test --config=${{ matrix.compiler }} //test:all
