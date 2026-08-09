@@ -13,16 +13,14 @@ bazel_dep(name = "boost.rational", version = "1.90.0.bcr.1")
 bazel_dep(name = "googletest", version = "1.17.0.bcr.2")
 bazel_dep(name = "boost.test", version = "1.90.0.bcr.1")
 
-# Run clang-tidy, with `bazel ... --config clang-tidy`.
-# clang-tidy requires access to included files, so it is most useful to treat
-# it, effectively, as a compiler.
-
-# (2024) The "bazel_clang_tidy" repository does not seem to be very actively
-# maintained, but it does do the job.
-# Except that there does not seem to be a bzlmod registry that has it.
-# So give the Git source explicitly:
-bazel_dep(name = "bazel_clang_tidy", version = "")
+# IDEs as well as other tools can use a compile_commands.json databse to know
+# how files are compiled.
+# This is used, for example, for clang-tidy.
+# To generate the compile_commands.json file, run
+#   bazel run --config=clang @hedron_compile_commands//:refresh_all
+bazel_dep(name = "hedron_compile_commands", dev_dependency = True)
 git_override(
-    module_name="bazel_clang_tidy",
-    remote="https://github.com/erenon/bazel_clang_tidy.git",
-    commit='c4d35e0d0b838309358e57a2efed831780')
+    module_name = "hedron_compile_commands",
+    remote = "https://github.com/helly25/bazel-compile-commands-extractor.git",
+    commit = "6eb3ff1de6445355552ef4230be0caf3e1dd27e5",
+)

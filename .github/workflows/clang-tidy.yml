@@ -25,4 +25,7 @@ jobs:
         disk-cache: ${{ github.workflow }}
         # Share repository cache between workflows.
         repository-cache: true
-    - run: bazel build //... --config clang-tidy
+    # Generate compile_commands.json.
+    - run: bazel run @hedron_compile_commands//:refresh_all
+    # Run clang-tidy on all C++ files, using compile_commands.json.
+    - run: clang-tidy -p . --config-file=.clang-tidy --exclude-header-filter='external/.*' `find . -name '*.?pp'`
