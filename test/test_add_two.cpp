@@ -3,7 +3,7 @@
 // Ignore warnings caused by Google Test macros.
 // NOLINTBEGIN(misc-use-internal-linkage,
 // bugprone-throwing-static-initialization, cert-err58-cpp,
-// cppcoreguidelines-owning-memory)
+// cppcoreguidelines-owning-memory, modernize-use-scoped-lock)
 
 #include <gtest/gtest.h>
 
