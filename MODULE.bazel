@@ -10,7 +10,7 @@ bazel_dep(name = "rules_cc", version = "0.2.22")
 bazel_dep(name = "boost.rational", version = "1.90.0.bcr.1")
 
 # Test frameworks that can be used:
-bazel_dep(name = "googletest", version = "1.15.2")
+bazel_dep(name = "googletest", version = "1.17.0.bcr.2")
 bazel_dep(name = "boost.test", version = "1.90.0.bcr.1")
 
 # IDEs as well as other tools can use a compile_commands.json databse to know
