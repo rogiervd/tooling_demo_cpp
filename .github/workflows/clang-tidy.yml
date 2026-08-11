@@ -28,4 +28,4 @@ jobs:
     # Generate compile_commands.json.
     - run: bazel run @hedron_compile_commands//:refresh_all
     # Run clang-tidy on all C++ files, using compile_commands.json.
-    - run: clang-tidy -p . --config-file=.clang-tidy --exclude-header-filter='external/.*' `find . -name '*.?pp'`
+    - run: clang-tidy-22 -p . --config-file=.clang-tidy --exclude-header-filter='external/.*' `find . -name '*.?pp'`
