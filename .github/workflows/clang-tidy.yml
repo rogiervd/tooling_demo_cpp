@@ -28,8 +28,4 @@ jobs:
     # Generate compile_commands.json.
     - run: bazel run @hedron_compile_commands//:refresh_all
     # Run clang-tidy on all C++ files, using compile_commands.json.
-    # --exclude-header-filter cannot be used on Ubuntu 24.04 yet, but
-    # Ubuntu 26.04 causes crashes.
-    # So use --header-filter instead, which needs to be updated if new
-    # directories are added.
-    - run: clang-tidy -p . --config-file=.clang-tidy --header-filter='^(include|test).*' `find . -name '*.?pp'`
+    - run: clang-tidy -p . --config-file=.clang-tidy --exclude-header-filter='external/.*' `find . -name '*.?pp'`
