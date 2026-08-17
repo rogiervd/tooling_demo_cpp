@@ -24,8 +24,5 @@ Checks: >
     -llvm-header-guard,
     -misc-include-cleaner,
 
-ExtraArgs:
-    - -Wno-pragma-once-outside-header
-
 # TODO add info on how to ignore errors.
 WarningsAsErrors: "*"

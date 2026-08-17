@@ -1,4 +1,5 @@
-#pragma once
+#ifndef COMPUTE_ADD_TWO_HPP
+#define COMPUTE_ADD_TWO_HPP
 
 #include <boost/rational.hpp>
 
@@ -18,3 +19,5 @@ public:
 
 
 }  // namespace compute
+
+#endif  // COMPUTE_ADD_TWO_HPP

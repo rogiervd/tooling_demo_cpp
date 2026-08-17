@@ -15,6 +15,13 @@ build --cxxopt=-std=c++17
 build --cxxopt=-Werror
 build --cxxopt=-Wall
 
+# GCC Configuration
+build:gcc --repo_env=CC=gcc
+
+# Clang Configuration using your custom suite
+build:clang --crosstool_top=//toolchain:clang_suite
+build:clang --compiler=clang
+
 # Configuration for builds with address sanitiser.
 # This can be selected with
 #   bazel ... --config asan
@@ -42,12 +49,11 @@ build:ubsan --linkopt -fsanitize-link-c++-runtime
 
 # Configuration for "builds" with clang-tidy, which looks for errors.
 # This can be selected with
-#   bazel ... --config clang-tiday
+#   bazel ... --config clang-tidy
 build:clang-tidy --aspects @bazel_clang_tidy//clang_tidy:clang_tidy.bzl%clang_tidy_aspect
 build:clang-tidy --output_groups=report
 # Actually use ./.clang-tidy.
 build:clang-tidy --@bazel_clang_tidy//:clang_tidy_config=//:clang_tidy_config
-
 # Settings for generating code coverage for tests.
 coverage --instrumentation_filter='-googletest'
 coverage --combined_report=lcov

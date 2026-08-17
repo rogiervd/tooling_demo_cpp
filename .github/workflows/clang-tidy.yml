@@ -13,11 +13,11 @@ jobs:
     # clang-tidy might behave slightly differently on difference operating
     # systems, but hopefully using a recent Ubuntu will make it cover a fair
     # amount.
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-26.04
         
     steps:
-    - uses: actions/checkout@v4
-    - uses: bazel-contrib/setup-bazel@0.8.1
+    - uses: actions/checkout@v7
+    - uses: bazel-contrib/setup-bazel@0.19.0
       with:
         # Avoid downloading Bazel every time.
         bazelisk-cache: true
@@ -25,4 +25,19 @@ jobs:
         disk-cache: ${{ github.workflow }}
         # Share repository cache between workflows.
         repository-cache: true
-    - run: bazel build //... --config clang-tidy
+
+    - name: Generate compile_commands.json
+      run: bazel run @hedron_compile_commands//:refresh_all
+
+    - name: Generate header files
+      # Generate header files that compile_commands.json references,
+      # by actually building the targets.
+      continue-on-error: true
+      run: bazel build //...
+
+    - name: Run clang-tidy on all C++ files
+      # Run only on .cpp files, otherwise clang-tidy will try and compile header
+      # files, as it were.
+      # -p . means: use compile_commands.json.
+      # clang-tidy v21 crashed.
+      run: clang-tidy-22 -p . --config-file=.clang-tidy --exclude-header-filter='external/.*' `find . -name '*.cpp'`
