@@ -31,7 +31,7 @@ jobs:
 
     - name: Generate header files that compile_commands.json references, by actually building the targets.
       continue-on-error: true
-      run: bazel build --nobuild //...
+      run: bazel build //...
 
     - name: Run clang-tidy on all C++ files, using compile_commands.json.
       run: clang-tidy-22 -p . --config-file=.clang-tidy --exclude-header-filter='external/.*' `find . -name '*.cpp'`
