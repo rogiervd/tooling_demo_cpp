@@ -26,12 +26,18 @@ jobs:
         # Share repository cache between workflows.
         repository-cache: true
 
-    - name: Generate compile_commands.json.
+    - name: Generate compile_commands.json
       run: bazel run @hedron_compile_commands//:refresh_all
 
-    - name: Generate header files that compile_commands.json references, by actually building the targets.
+    - name: Generate header files
+      # Generate header files that compile_commands.json references,
+      # by actually building the targets.
       continue-on-error: true
       run: bazel build //...
 
-    - name: Run clang-tidy on all C++ files, using compile_commands.json.
+    - name: Run clang-tidy on all C++ files
+      # Run only on .cpp files, otherwise clang-tidy will try and compile header
+      # files, as it were.
+      # -p . means: use compile_commands.json.
+      # clang-tidy v21 crashed.
       run: clang-tidy-22 -p . --config-file=.clang-tidy --exclude-header-filter='external/.*' `find . -name '*.cpp'`
