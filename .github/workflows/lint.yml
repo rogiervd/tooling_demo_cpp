@@ -34,6 +34,7 @@ jobs:
         chmod +x ./buildifier
 
     - name: Check Bazel files
+      id: buildifier
       run: ./buildifier -mode=check -lint=warn -r .
       continue-on-error: true
 
@@ -55,3 +56,6 @@ jobs:
       # clang-tidy v21 crashed.
       run: clang-tidy-22 -p . --config-file=.clang-tidy --exclude-header-filter='external/.*' `find . -name '*.cpp'`
 
+    - name: Fail job if buildifier failed
+      if: steps.buildifier.outcome == 'failure'
+      run: exit 1
