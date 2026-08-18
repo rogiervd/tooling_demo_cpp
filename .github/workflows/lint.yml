@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  clang-tidy:
+  lint:
     # clang-tidy might behave slightly differently on difference operating
     # systems, but hopefully using a recent Ubuntu will make it cover a fair
     # amount.
@@ -26,6 +26,14 @@ jobs:
         # Share repository cache between workflows.
         repository-cache: true
 
+    - name: Setup buildifier
+      uses: jbajic/setup-buildifier@v1
+      with:
+        version: 7.1.1
+
+    - name: Check Bazel files
+      run: buildifier -mode=check -lint=warn -r .
+
     - name: Generate compile_commands.json
       run: bazel run @hedron_compile_commands//:refresh_all
 
@@ -41,3 +49,4 @@ jobs:
       # -p . means: use compile_commands.json.
       # clang-tidy v21 crashed.
       run: clang-tidy-22 -p . --config-file=.clang-tidy --exclude-header-filter='external/.*' `find . -name '*.cpp'`
+
