@@ -16,13 +16,15 @@ jobs:
     steps:
     - uses: actions/checkout@v7
   
-    - name: Setup buildifier
-      uses: jbajic/setup-buildifier@v1
-      with:
-        version: 7.1.1
+    - name: Install buildifier
+      run: |
+        curl -Lo ./buildifier https://github.com/bazelbuild/buildtools/releases/download/v7.3.1/buildifier-linux-amd64
+        chmod +x ./buildifier
 
     - name: Check formatting of Bazel files
-      run: buildifier -mode=check -lint=off -r .
+      id: buildifier
+      run: ./buildifier -mode=diff -lint=off -r .
+      continue-on-error: true
 
     - name: Check formatting of C++ files
       shell: bash
@@ -32,3 +34,7 @@ jobs:
       # It might be useful to hide commits that only format code from git blame:
       # https://docs.github.com/en/repositories/working-with-files/using-files/
       # viewing-a-file#ignore-commits-in-the-blame-view
+
+    - name: Fail job if buildifier failed
+      if: steps.buildifier.outcome == 'failure'
+      run: exit 1
