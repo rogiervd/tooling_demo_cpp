@@ -26,13 +26,13 @@ jobs:
         # Share repository cache between workflows.
         repository-cache: true
 
-    - name: Setup buildifier
-      uses: jbajic/setup-buildifier@v1
-      with:
-        version: 7.1.1
+    - name: Install buildifier
+      run: |
+        curl -Lo ./buildifier https://github.com/bazelbuild/buildtools/releases/download/v7.3.1/buildifier-linux-amd64
+        chmod +x ./buildifier
 
     - name: Check Bazel files
-      run: buildifier -mode=check -lint=warn -r .
+      run: ./buildifier -mode=check -lint=warn -r .
 
     - name: Generate compile_commands.json
       run: bazel run @hedron_compile_commands//:refresh_all
