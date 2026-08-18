@@ -1,14 +1,14 @@
 load("@rules_cc//cc:defs.bzl", "cc_library")
 
 cc_library(
-    name="compute",
-    hdrs=["include/compute/add_two.hpp"],
-    visibility=["//visibility:public"],
-    strip_include_prefix="include/",
-    include_prefix="",
-    deps=[
+    name = "compute",
+    hdrs = ["include/compute/add_two.hpp"],
+    include_prefix = "",
+    strip_include_prefix = "include/",
+    visibility = ["//visibility:public"],
+    deps = [
         "@boost.rational//:boost.rational",
-    ]
+    ],
 )
 
 # Use .clang-tidy when "clang_tidy_config" is requested.

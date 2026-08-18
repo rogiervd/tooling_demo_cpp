@@ -21,6 +21,6 @@ bazel_dep(name = "boost.test", version = "1.90.0.bcr.1")
 bazel_dep(name = "hedron_compile_commands", dev_dependency = True)
 git_override(
     module_name = "hedron_compile_commands",
-    remote = "https://github.com/helly25/bazel-compile-commands-extractor.git",
     commit = "6eb3ff1de6445355552ef4230be0caf3e1dd27e5",
+    remote = "https://github.com/helly25/bazel-compile-commands-extractor.git",
 )
