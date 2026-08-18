@@ -26,6 +26,11 @@ jobs:
         # Share repository cache between workflows.
         repository-cache: true
 
+    - name: Setup buildifier
+      uses: jbajic/setup-buildifier@v1
+      with:
+        version: 7.1.1
+
     - name: Check Bazel files
       run: buildifier -mode=check -lint=warn -r .
 
