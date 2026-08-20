@@ -1,21 +1,21 @@
 load("@rules_cc//cc:defs.bzl", "cc_test")
 
 cc_test(
-    name="test_add_two",
-    srcs=["test_add_two.cpp"],
-    deps=[
+    name = "test_add_two",
+    size = "small",
+    srcs = ["test_add_two.cpp"],
+    deps = [
         "//:compute",
         "@googletest//:gtest_main",
     ],
-    size="small"
 )
 
 cc_test(
-    name="test_add_two_2",
-    srcs=["test_add_two_2.cpp"],
-    deps=[
+    name = "test_add_two_2",
+    size = "small",
+    srcs = ["test_add_two_2.cpp"],
+    deps = [
         "//:compute",
         "@boost.test//:unit_test_main",
     ],
-    size="small"
 )
