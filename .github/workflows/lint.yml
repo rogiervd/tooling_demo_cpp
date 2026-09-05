@@ -1,61 +1,41 @@
 name: Static checks
-
+# Run clang-tidy.
+# This requires a compile_commands.json file, which is the reason why this is
+# a separate workflow from the pre-commit checks.
 on:
   push:
-    branches: [ main, develop, test-github-actions ]
+    branches: [main, develop, test-github-actions]
   pull_request:
-    branches: [ main, develop, test-github-actions ]
-
+    branches: [main, develop, test-github-actions]
   workflow_dispatch:
-
 jobs:
   lint:
     # clang-tidy might behave slightly differently on difference operating
     # systems, but hopefully using a recent Ubuntu will make it cover a fair
     # amount.
     runs-on: ubuntu-26.04
-        
     steps:
-    - uses: actions/checkout@v7
-    - uses: bazel-contrib/setup-bazel@0.19.0
-      with:
-        # Avoid downloading Bazel every time.
-        bazelisk-cache: true
-        # Store build cache per workflow.
-        disk-cache: ${{ github.workflow }}
-        # Share repository cache between workflows.
-        repository-cache: true
+      - uses: actions/checkout@v7
+      - uses: bazel-contrib/setup-bazel@0.19.0
+        with:
+          # Avoid downloading Bazel every time.
+          bazelisk-cache: true
+          # Store build cache per workflow.
+          disk-cache: ${{ github.workflow }}
+          # Share repository cache between workflows.
+          repository-cache: true
+      - name: Generate compile_commands.json
+        # Check C++ files.
 
-    # Check Bazel files.
-
-    - name: Install buildifier
-      run: |
-        curl -Lo ./buildifier https://github.com/bazelbuild/buildtools/releases/download/v7.3.1/buildifier-linux-amd64
-        chmod +x ./buildifier
-
-    - name: Check Bazel files
-      id: buildifier
-      run: ./buildifier -mode=check -lint=warn -r .
-      continue-on-error: true
-
-    # Check C++ files.
-
-    - name: Generate compile_commands.json
-      run: bazel run @hedron_compile_commands//:refresh_all
-
-    - name: Generate header files
-      # Generate header files that compile_commands.json references,
-      # by actually building the targets.
-      continue-on-error: true
-      run: bazel build //...
-
-    - name: Run clang-tidy on all C++ files
-      # Run only on .cpp files, otherwise clang-tidy will try and compile header
-      # files, as it were.
-      # -p . means: use compile_commands.json.
-      # clang-tidy v21 crashed.
-      run: clang-tidy-22 -p . --config-file=.clang-tidy --exclude-header-filter='external/.*' `find . -name '*.cpp'`
-
-    - name: Fail job if buildifier failed
-      if: steps.buildifier.outcome == 'failure'
-      run: exit 1
+        run: bazel run @hedron_compile_commands//:refresh_all
+      - name: Generate header files
+        # Generate header files that compile_commands.json references,
+        # by actually building the targets.
+        continue-on-error: true
+        run: bazel build //...
+      - name: Run clang-tidy on all C++ files
+        # Run only on .cpp files, otherwise clang-tidy will try and compile header
+        # files, as it were.
+        # -p . means: use compile_commands.json.
+        # clang-tidy v21 crashed.
+        run: clang-tidy-22 -p . --config-file=.clang-tidy --exclude-header-filter='external/.*' `find . -name '*.cpp'`

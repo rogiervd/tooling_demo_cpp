@@ -1,37 +1,32 @@
 name: Code coverage of tests
-
 on:
   push:
-    branches: [ main, develop, test-github-actions ]
+    branches: [main, develop, test-github-actions]
   pull_request:
-    branches: [ main, develop, test-github-actions ]
-
+    branches: [main, develop, test-github-actions]
   workflow_dispatch:
-
 jobs:
   coverage:
     # Any differences between coverage on different operating systems are
     # probably minor.
     runs-on: ubuntu-26.04
-        
     steps:
-    - uses: actions/checkout@v7
-    - uses: bazel-contrib/setup-bazel@0.19.0
-      with:
-        # Avoid downloading Bazel every time.
-        bazelisk-cache: true
-        # Store build cache per workflow.
-        disk-cache: ${{ github.workflow }}
-        # Share repository cache between workflows.
-        repository-cache: true
-    - run: bazel coverage //test:all
-    - run: wc bazel-out/_coverage/_coverage_report.dat
-
-    - name: Coveralls
-      uses: coverallsapp/github-action@v2
-      with:
-        file: bazel-out/_coverage/_coverage_report.dat
-        format: lcov
-      # To get pull requests comments, it may be necessary to invite the
-      # @coveralls user to have Write permissions.
-      # See https://github.com/marketplace/actions/coveralls-github-action
+      - uses: actions/checkout@v7
+      - uses: bazel-contrib/setup-bazel@0.19.0
+        with:
+          # Avoid downloading Bazel every time.
+          bazelisk-cache: true
+          # Store build cache per workflow.
+          disk-cache: ${{ github.workflow }}
+          # Share repository cache between workflows.
+          repository-cache: true
+      - run: bazel coverage //test:all
+      - run: wc bazel-out/_coverage/_coverage_report.dat
+      - name: Coveralls
+        uses: coverallsapp/github-action@v2
+        with:
+          file: bazel-out/_coverage/_coverage_report.dat
+          format: lcov
+        # To get pull requests comments, it may be necessary to invite the
+        # @coveralls user to have Write permissions.
+        # See https://github.com/marketplace/actions/coveralls-github-action
