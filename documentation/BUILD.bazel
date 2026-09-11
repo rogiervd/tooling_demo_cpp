@@ -1,0 +1,85 @@
+# Build Sphinx documentation.
+# This first runs Doxygen to extract the C++ API documentation.
+# Since Sphinx is a Python tool, we use the rules_python extension to set up a
+# Python toolchain and install the required Python packages.
+# Also, use ./requirements.in to specify the Python packages that are needed
+# for building the documentation.
+
+# Generating ./requirements.txt:
+#   bazel run //documentation:requirements
+# Building the documentation:
+#   bazel build //documentation:documentation
+# Building and locally serving the documentation:
+#   bazel run //documentation:documentation.serve
+
+load("@doxygen//:doxygen.bzl", "doxygen")
+load("@rules_python//python/uv:lock.bzl", "lock")
+load("@sphinxdocs//sphinxdocs:sphinx.bzl", "sphinx_build_binary", "sphinx_docs")
+load("@sphinxdocs//sphinxdocs:sphinx_docs_library.bzl", "sphinx_docs_library")
+
+# Regenerate requirements.txt from requirements.in with:
+#   bazel run //documentation:requirements
+lock(
+    name = "requirements",
+    srcs = ["requirements.in"],
+    out = "requirements.txt",
+)
+
+# Build the API documentation from C++ source code with Doxygen, for Breathe
+# to pick up.
+doxygen(
+    name = "doxygen_xml",
+    outs = ["xml"],
+    configurations = [
+        # Since this depends on the whole library, explicitly exclude external
+        # dependencies.
+        "EXCLUDE_PATTERNS = */external/*",
+    ],
+    generate_html = False,
+    # The XML output is used by Breathe to generate the Sphinx documentation.
+    generate_xml = True,
+    project_name = "tooling_demo_cpp",
+    # Depend on the whole library.
+    # This also draws in dependencies, so EXCLUDE_PATTERNS is needed.
+    deps = ["//:compute"],
+    # An alternative to deps is to explicitly depend on the relevant files,
+    # which could be a filegroup in the project with the files, with
+    # visibility at least "//documentation:__pkg__".
+    # srcs = ["//compute:doc_sources"],
+)
+
+# Install the Sphinx binary, and modules that the documentation needs.
+sphinx_build_binary(
+    name = "sphinx-build",
+    deps = [
+        "@pypi//breathe",
+        "@pypi//sphinx",
+        "@pypi//sphinx_rtd_theme",
+    ],
+)
+
+# The text sources for the documentation.
+sphinx_docs_library(
+    name = "sources",
+    srcs = glob([
+        "*.rst",
+        "reference/*.rst",
+    ]),
+)
+
+# The Doxygen-generated XML sources.
+sphinx_docs_library(
+    name = "doxygen_docs",
+    srcs = [":doxygen_xml"],
+)
+
+sphinx_docs(
+    name = "documentation",
+    config = "conf.py",
+    formats = ["html"],
+    sphinx = ":sphinx-build",
+    deps = [
+        ":doxygen_docs",
+        ":sources",
+    ],
+)
