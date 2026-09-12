@@ -1,0 +1,37 @@
+# Define the tests.
+# Each test should be a separate cc_test target.
+# It is not possible to use a for loop in BUILD.bazel, but it is possible to
+# define a macro in a .bzl file, and call that macro multiple times in
+# BUILD.bazel.
+
+# It is fine to put cc_test targets in multiple BUILD.bazel files in various
+# subdirectories/packages.
+# That makes it easy to run a subset of tests, e.g. with
+#   bazel test //test/compute:all
+# ("all" is a special target on the command line) or
+#   bazel test //test/compute:test_add_two
+
+# To run all test in all packages:
+#   bazel test //...
+
+load("@rules_cc//cc:defs.bzl", "cc_test")
+
+cc_test(
+    name = "test_add_two",
+    size = "small",
+    srcs = ["google_test/test_add_two.cpp"],
+    deps = [
+        "//:compute",
+        "@googletest//:gtest_main",
+    ],
+)
+
+cc_test(
+    name = "test_add_two_2",
+    size = "small",
+    srcs = ["boost_test/test_add_two_2.cpp"],
+    deps = [
+        "//:compute",
+        "@boost.test//:unit_test_main",
+    ],
+)
