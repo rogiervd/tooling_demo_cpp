@@ -1,5 +1,5 @@
 module(
-    name = "tooling_demo",
+    name = "tooling_demo_cpp",
     version = "0.1.0",
     # use compatibility_level to indicate breaking compatibility
 )

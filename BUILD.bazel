@@ -1,8 +1,13 @@
 load("@rules_cc//cc:defs.bzl", "cc_library")
 
+# The main target that should be used by other modules that want to depend on
+# this library.
+# Adoption: if you make sure the name of the target is the same as the name of
+# the package, the library can be used with just "//tooling_demo_cpp" instead of
+# "//tooling_demo_cpp:tooling_demo_cpp".
 cc_library(
-    name = "compute",
-    hdrs = ["include/compute/add_two.hpp"],
+    name = "tooling_demo_cpp",
+    hdrs = ["include/tooling_demo_cpp/add_two.hpp"],
     include_prefix = "",
     strip_include_prefix = "include/",
     visibility = ["//visibility:public"],
@@ -21,6 +26,6 @@ filegroup(
 # All include files, for Doxygen to generate documentation from.
 filegroup(
     name = "doc_sources",
-    srcs = glob(["include/compute/**"]),
+    srcs = glob(["include/tooling_demo_cpp/**"]),
     visibility = ["//documentation:__pkg__"],
 )

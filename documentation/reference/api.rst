@@ -3,5 +3,5 @@ Classes
 
 This implements addition.
 
-.. doxygenclass:: compute::AddTwo
+.. doxygenclass:: tooling_demo_cpp::AddTwo
     :members: operator()

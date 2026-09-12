@@ -1,9 +1,9 @@
-#ifndef COMPUTE_ADD_TWO_HPP
-#define COMPUTE_ADD_TWO_HPP
+#ifndef TOOLING_DEMO_CPP_ADD_TWO_HPP
+#define TOOLING_DEMO_CPP_ADD_TWO_HPP
 
 #include <boost/rational.hpp>
 
-namespace compute {
+namespace tooling_demo_cpp {
 
 /**
  * @brief A functor that adds two to an integer value.
@@ -26,6 +26,6 @@ public:
 };
 
 
-}  // namespace compute
+}  // namespace tooling_demo_cpp
 
-#endif  // COMPUTE_ADD_TWO_HPP
+#endif  // TOOLING_DEMO_CPP_ADD_TWO_HPP

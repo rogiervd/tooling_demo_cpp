@@ -1,13 +1,13 @@
 # C++ tooling demo
 
 This is a demo of how to set up tooling for C++ with Bazel.
-It has a module "compute" in the `include/compute` directory, and tests in `test`.
+It has a module "tooling_demo_cpp" in the `include/tooling_demo_cpp` directory, and tests in `test`.
 
 ## Use this library with Bazel
 
 This section explains how this repo could be used if it provided useful functionality.
 
-1. Targets should depend on `@tooling_demo_cpp//:compute`.
+1. Make your project depend on `@tooling_demo_cpp//:tooling_demo_cpp`, or, since the name of the module and the target are the same, `@tooling_demo_cpp`.
 
 2. Use the Bazel module registry at `github.com/rogiervd/...` by adding to your `.bazelrc`
 

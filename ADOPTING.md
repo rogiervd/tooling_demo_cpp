@@ -14,8 +14,8 @@ This framework is fairly opinionated:
 
 # Structure of this framework
 
-* `include/compute` contains the headers that a user of this library should use.
-* `test/compute` contains the tests of the library.
+* `include/tooling_demo_cpp` contains the headers that a user of this library should use.
+* `test/tooling_demo_cpp` contains the tests of the library.
 * `documentation` contains the documentation for the library.
 * `.github/workflows` contains the GitHub Actions specifications.
 
@@ -32,8 +32,8 @@ and the `BUILD.bazel` files in various directories.
 * Add a license, possibly by copying
 `LICENSE`.
 * Rename
-`include/compute`
-and `test/compute` to have the name of the actual project.
+`include/tooling_demo_cpp`
+and `test/tooling_demo_cpp` to have the name of the actual project.
 * To run unit tests on GitHub Actions, copy `.github/workflows/test.yml`.
 
 

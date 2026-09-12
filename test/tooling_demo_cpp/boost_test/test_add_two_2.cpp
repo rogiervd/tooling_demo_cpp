@@ -1,4 +1,4 @@
-#include "compute/add_two.hpp"
+#include "tooling_demo_cpp/add_two.hpp"
 
 // Ignore warnings caused by Boost.Test macros.
 // NOLINTBEGIN(misc-use-internal-linkage, readability-identifier-length,
@@ -11,7 +11,7 @@
 
 BOOST_AUTO_TEST_CASE(AddTwo)
 {
-    const compute::AddTwo add_two;
+    const tooling_demo_cpp::AddTwo add_two;
     BOOST_TEST(add_two(70) == 72);
 }
 
