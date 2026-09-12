@@ -20,7 +20,7 @@ jobs:
           disk-cache: ${{ github.workflow }}
           # Share repository cache between workflows.
           repository-cache: true
-      - run: bazel coverage //test:all
+      - run: bazel coverage //test:...
       - run: wc bazel-out/_coverage/_coverage_report.dat
       - name: Coveralls
         uses: coverallsapp/github-action@v2
