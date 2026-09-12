@@ -29,23 +29,13 @@ lock(
 # to pick up.
 doxygen(
     name = "doxygen_xml",
+    # Explicitly depend on the relevant files, as a filegroup in ../BUILD.bazel.
+    srcs = ["//:doc_sources"],
     outs = ["xml"],
-    configurations = [
-        # Since this depends on the whole library, explicitly exclude external
-        # dependencies.
-        "EXCLUDE_PATTERNS = */external/*",
-    ],
     generate_html = False,
     # The XML output is used by Breathe to generate the Sphinx documentation.
     generate_xml = True,
     project_name = "tooling_demo_cpp",
-    # Depend on the whole library.
-    # This also draws in dependencies, so EXCLUDE_PATTERNS is needed.
-    deps = ["//:compute"],
-    # An alternative to deps is to explicitly depend on the relevant files,
-    # which could be a filegroup in the project with the files, with
-    # visibility at least "//documentation:__pkg__".
-    # srcs = ["//compute:doc_sources"],
 )
 
 # Install the Sphinx binary, and modules that the documentation needs.
