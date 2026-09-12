@@ -25,13 +25,6 @@ cc_library(
     ],
 )
 
-# Use .clang-tidy when "clang_tidy_config" is requested.
-filegroup(
-    name = "clang_tidy_config",
-    srcs = [".clang-tidy"],
-    visibility = ["//visibility:public"],
-)
-
 # All include files, for Doxygen to generate documentation from.
 filegroup(
     name = "doc_sources",
