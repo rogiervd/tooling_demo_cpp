@@ -87,7 +87,7 @@ clang-tidy -p . --config-file=.clang-tidy --exclude-header-filter='external/.*' 
 ### Coverage
 
 ```
-bazel coverage //test:all
+bazel coverage //test/...
 ```
 
 [![Code coverage](https://coveralls.io/repos/github/rogiervd/tooling_demo_cpp/badge.svg?branch=main)](https://coveralls.io/github/rogiervd/tooling_demo_cpp?branch=main)
