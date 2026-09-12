@@ -19,8 +19,10 @@ This framework is fairly opinionated:
 * `documentation` contains the documentation for the library.
 * `.github/workflows` contains the GitHub Actions specifications.
 
-# How to  adopt this framework
+# How to adopt this framework
 
+* Do not clone this framework; that makes little sense.
+  Future improvements should probably be carried across as patches.
 * Copy
 `.bazelrc`,
 `.bazelversion`,
