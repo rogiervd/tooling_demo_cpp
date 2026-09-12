@@ -52,6 +52,10 @@ and `test/compute` to have the name of the actual project.
 `.clang-format`,
 and `.yamllint.yaml`.
 * To run formatting on GitHub Actions, copy `.github/workflows/pre-commit.yml`
+* If you apply this framework to a pre-existing library which is not formatted correctly, then
+  * Make a separate commit for just reformatting.
+  * add the full SHA-1 hash of the reformatting commit to `.git-blame-ignore-revs` and check it in.
+  * `git blame` (and the blame on GitHub) should now be unpolluted.
 
 ### Linting
 * Copy
