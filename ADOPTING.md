@@ -71,7 +71,7 @@ and `.yamllint.yaml`.
 `.github/workflows/valgrind.yml`
 * A lot of the details of how to call helpers are specified in `.bazelrc`.
 
-## Test coverage
+### Test coverage
 To run coverage on GitHub Actions,
 * Copy `.github/workflows/coverage.yml`.
 * Get this repo set up on coveralls.io.

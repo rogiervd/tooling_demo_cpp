@@ -64,7 +64,7 @@ coverage --combined_report=lcov
 # LLVM_PROFDATA=`xcrun -f llvm-profdata`
 # LLVM_COV=`xcrun -f llvm-cov`
 
-# bazel coverage //test/... \
+# bazel coverage //... \
 #     --experimental_generate_llvm_lcov \
 #     --test_env=COVERAGE_GCOV_PATH=${LLVM_PROFDATA} \
 #     --test_env=LLVM_COV=${LLVM_COV} \

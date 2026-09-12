@@ -29,7 +29,7 @@ Understanding Bazel is not a prerequisite for working with this code.
 ### Unit testing
 
 ```
-bazel test //test/...
+bazel test //...
 ```
 
 In CI, this is run for multiple configurations.
