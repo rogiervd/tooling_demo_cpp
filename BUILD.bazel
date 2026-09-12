@@ -7,12 +7,21 @@ load("@rules_cc//cc:defs.bzl", "cc_library")
 # "//tooling_demo_cpp:tooling_demo_cpp".
 cc_library(
     name = "tooling_demo_cpp",
+    # Sources to be compiled into the library.
+    # Adoption note: for a header-only library, leave this empty.
+    srcs = ["source/tooling_demo_cpp/add_two.cpp"],
+    # Headers that a user of this library can include.
     hdrs = ["include/tooling_demo_cpp/add_two.hpp"],
+    # The prefix to be added to the include path.
+    # If the include directory can be set to "include", then include_prefix
+    # should be set to "".
     include_prefix = "",
+    # The prefix to be stripped from the include path.
     strip_include_prefix = "include/",
     visibility = ["//visibility:public"],
+    # Dependencies of this library.
     deps = [
-        "@boost.rational//:boost.rational",
+        "@boost.rational",
     ],
 )
 

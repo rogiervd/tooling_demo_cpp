@@ -1,8 +1,6 @@
 #ifndef TOOLING_DEMO_CPP_ADD_TWO_HPP
 #define TOOLING_DEMO_CPP_ADD_TWO_HPP
 
-#include <boost/rational.hpp>
-
 namespace tooling_demo_cpp {
 
 /**
@@ -16,13 +14,7 @@ public:
      * @param value The integer value to which two will be added.
      * @return The result of adding two to the input value.
      */
-    int operator()(int value) const
-    {
-        const int numerator = 10;
-        const int denominator = 5;
-        const boost::rational<int> fraction(numerator, denominator);
-        return value + fraction.numerator();
-    }
+    int operator()(int value) const;
 };
 
 
