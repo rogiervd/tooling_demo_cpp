@@ -17,3 +17,10 @@ filegroup(
     srcs = [".clang-tidy"],
     visibility = ["//visibility:public"],
 )
+
+# All include files, for Doxygen to generate documentation from.
+filegroup(
+    name = "doc_sources",
+    srcs = glob(["include/compute/**"]),
+    visibility = ["//documentation:__pkg__"],
+)
