@@ -1,4 +1,4 @@
-#include "compute/add_two.hpp"
+#include "tooling_demo_cpp/add_two.hpp"
 
 // Ignore warnings caused by Google Test macros.
 // NOLINTBEGIN(misc-use-internal-linkage,
@@ -9,7 +9,7 @@
 
 TEST(AddTwo, Fifty)
 {
-    const compute::AddTwo add_two;
+    const tooling_demo_cpp::AddTwo add_two;
     EXPECT_EQ(add_two(50), 52);
 }
 
