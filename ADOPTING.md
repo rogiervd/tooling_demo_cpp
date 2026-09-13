@@ -76,3 +76,6 @@ To run coverage on GitHub Actions,
 * Copy `.github/workflows/coverage.yml`.
 * Get this repo set up on coveralls.io.
 * Add the Coveralls user to the repo on GitHub.
+
+### .gitignore
+* Copy `gitignore` to make Git ignore `bazel-*` symlinks in the root directory.
