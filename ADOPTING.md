@@ -79,3 +79,8 @@ To run coverage on GitHub Actions,
 
 ### .gitignore
 * Copy `gitignore` to make Git ignore `bazel-*` symlinks in the root directory.
+
+### Files specific to Visual Studio Code
+You may or may not want to check these into your repo.
+* `.vscode/settings.json` tells VS code to ignore `bazel-*` symlinks when searching.
+* `.vscode/c_cpp_properties.json` instructs IntelliSense to work from `compile_commands.json`, which can be generated with the Bazel invocation given in `README.md`.
