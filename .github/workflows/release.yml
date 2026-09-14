@@ -1,8 +1,10 @@
 name: Tag release
-# Runs after a "release-X.Y.Z" branch (created by tools/release.py) is
-# merged into main. Tags the merge commit with the version from MODULE.bazel
-# and publishes a GitHub release; GitHub automatically attaches a source
-# archive (zip and tar.gz) to every release.
+# Runs after a "release-X.Y.Z" branch (created by tool/release.py) is
+# merged into main. Creates a draft GitHub release targeting the merge
+# commit, named after the version from MODULE.bazel; GitHub automatically
+# attaches a source archive (zip and tar.gz) to every release. The tag
+# itself, and the release, are only created for real once the draft is
+# published on GitHub.
 on:
   pull_request:
     types: [closed]
@@ -30,4 +32,5 @@ jobs:
             --repo "${{ github.repository }}" \
             --title "v${{ steps.version.outputs.version }}" \
             --target "${{ github.event.pull_request.merge_commit_sha }}" \
-            --generate-notes
+            --generate-notes \
+            --draft
