@@ -1,9 +1,6 @@
 # Use bzlmod (Bazel Modules) for dependency handling.
 common --enable_bzlmod
 
-# Bzlmod registry for the Boost libraries.
-common --registry https://raw.githubusercontent.com/bazelboost/registry/main
-
 # The standard Bazel registry (this gets removed when entries are added
 # explicitly so it needs to be added back explicitly).
 common --registry https://bcr.bazel.build/
