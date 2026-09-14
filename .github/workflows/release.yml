@@ -1,5 +1,5 @@
 name: Tag release
-# Runs after a "release-X.Y.Z" branch (created by tool/release.py) is
+# Runs after a "release-vX.Y.Z" branch (created by tool/release.py) is
 # merged into main. Creates a draft GitHub release targeting the merge
 # commit, named after the version from MODULE.bazel; GitHub automatically
 # attaches a source archive (zip and tar.gz) to every release. The tag
@@ -11,7 +11,7 @@ on:
     branches: [main]
 jobs:
   tag:
-    if: github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'release-')
+    if: github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'release-v')
     runs-on: ubuntu-26.04
     permissions:
       contents: write

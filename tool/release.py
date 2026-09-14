@@ -2,7 +2,7 @@
 """Cuts a new release.
 
 Bumps the version in MODULE.bazel, commits that change on a new
-"release-X.Y.Z" branch, pushes the branch to the "github" remote, and opens
+"release-vX.Y.Z" branch, pushes the branch to the "github" remote, and opens
 a pull request for it.
 
 Once the pull request is merged, the "Tag release" GitHub Actions workflow
@@ -132,7 +132,7 @@ def main() -> None:
             f"error: new version {new_version} is not newer than current version {old_version}"
         )
 
-    branch = f"release-{new_version}"
+    branch = f"release-v{new_version}"
     if branch_exists(branch):
         sys.exit(f"error: local branch {branch!r} already exists")
 
