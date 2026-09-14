@@ -1,6 +1,6 @@
 module(
     name = "tooling_demo_cpp",
-    version = "0.2.2",
+    version = "0.2.3",
 )
 
 bazel_dep(name = "rules_cc", version = "0.2.22")
