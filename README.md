@@ -33,6 +33,7 @@ bazel test //test/...
 ```
 
 In CI, this is run for multiple configurations.
+For an optimised buid, add `-c opt`.
 
 
 ### Formatting
