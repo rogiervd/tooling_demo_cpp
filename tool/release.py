@@ -97,7 +97,15 @@ def create_pull_request(branch: str, new_version: str, remote: str) -> None:
         + ["--base", MAIN_BRANCH]
         + ["--head", branch]
         + ["--title", f"Release v{new_version}"]
-        + ["--body", f"Bump version to {new_version}."],
+        + [
+            "--body",
+            (
+                f"Bump version to {new_version}.\n"
+                " Merging this will generate a draft release.\n"
+                "Once the release is published, "
+                "a PR into bazel-registry will be made."
+            ),
+        ],
         cwd=repo_root,
         check=True,
     )
