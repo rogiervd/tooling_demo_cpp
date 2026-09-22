@@ -34,7 +34,7 @@ and the `BUILD.bazel` files in various directories.
 * Rename
 `include/tooling_demo_cpp`
 and `test/tooling_demo_cpp` to have the name of the actual project.
-* To run unit tests on GitHub Actions, copy `.github/workflows/test.yml`.
+* To run unit tests on GitHub Actions, copy `.github/workflows/test{,-optimised}.yml`.
 
 
 ### Sphinx and Doxygen
