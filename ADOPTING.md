@@ -36,6 +36,22 @@ and the `BUILD.bazel` files in various directories.
 and `test/tooling_demo_cpp` to have the name of the actual project.
 * To run unit tests on GitHub Actions, copy `.github/workflows/test.yml`.
 
+### Publishing a new release
+* Copy `.github/workflows/release.yml` and `tool/release.py`.
+
+### Publishing the Bazel module in rogiervd's registry
+Any time there is a release, put in a PR to add this release of the Bazel module to the registry:
+* Copy `.bcr/presubmit.yml`, `.bcr/metadata.template.json`, `.github/workflows/publish-to-bazel-registry.yml`; copy and edit `.bcr/metadata.template.json`.
+* Then create a personal access token (PAT):
+  * Go to https://github.com/settings/tokens -> Generate new token -> Generate new token (classic, not the fine-grained kind: `publish-to-bcr`'s README notes fine-grained tokens can't open PRs against public repos yet).
+  * Name it something like `bazel-registry-publish-<module_repo>`.
+  * Pick an expiration (you'll need to regenerate and update the secret when it lapses).
+  * Check these two scopes: `repo` and `workflow`.
+  * Click "Generate token" and copy the value (GitHub only shows it once).
+  * Add it as a secret on the module repo (not the registry repo), since that's where `publish-to-bcr.yml` reads it from:
+    ```
+    gh secret set BCR_PUBLISH_TOKEN --repo rogiervd/<module_repo>
+    ```
 
 ### Sphinx and Doxygen
 * Copy `./documentation`.
@@ -54,7 +70,8 @@ and `.yamllint.yaml`.
 * To run formatting on GitHub Actions, copy `.github/workflows/pre-commit.yml`
 * If you apply this framework to a pre-existing library which is not formatted correctly, then
   * Make a separate commit for just reformatting.
-  * add the full SHA-1 hash of the reformatting commit to `.git-blame-ignore-revs` and check it in.
+  * add the full SHA-1 hash (`git rev-parse HEAD`) of the reformatting commit to `.git-blame-ignore-revs` and check this file in.
+  * Locally, say `git config blame.ignoreRevsFile .git-blame-ignore-revs`.
   * `git blame` (and the blame on GitHub) should now be unpolluted.
 
 ### Linting
@@ -78,7 +95,7 @@ To run coverage on GitHub Actions,
 * Add the Coveralls user to the repo on GitHub.
 
 ### .gitignore
-* Copy `gitignore` to make Git ignore `bazel-*` symlinks in the root directory.
+* Copy `.gitignore` to make Git ignore `bazel-*` symlinks in the root directory.
 
 ### Files specific to Visual Studio Code
 You may or may not want to check these into your repo.
