@@ -105,3 +105,13 @@ To serve the documentation from a webserver on `localhost`:
 ```
 bazel run //documentation:documentation.serve
 ```
+
+## Publishing a new release
+
+```
+./tool/release.py 1.2.3
+```
+
+This will make a pull request on GitHub.
+When the pull request is merged, it will trigger a pull request to [rogiervd's Bazel registry](https://github.com/rogiervd/bazel-registry/pulls).
+When this PR is merged, the new version of the Bazel module has been published and other modules can use it.
