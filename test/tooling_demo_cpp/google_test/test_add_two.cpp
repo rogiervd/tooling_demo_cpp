@@ -9,7 +9,7 @@
 
 TEST(AddTwo, Fifty)
 {
-    const tooling_demo_cpp::AddTwo add_two;
+    tooling_demo_cpp::AddTwo const add_two;
     EXPECT_EQ(add_two(50), 52);
 }
 

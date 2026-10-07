@@ -6,9 +6,9 @@ namespace tooling_demo_cpp {
 
 int AddTwo::operator()(int value) const
 {
-    const int numerator = 10;
-    const int denominator = 5;
-    const boost::rational<int> fraction(numerator, denominator);
+    int const numerator = 10;
+    int const denominator = 5;
+    boost::rational<int> const fraction(numerator, denominator);
     return value + fraction.numerator();
 }
 
