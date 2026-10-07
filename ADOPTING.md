@@ -35,8 +35,7 @@ This framework is fairly opinionated:
 `MODULE.bazel`,
 and the `BUILD.bazel` files in various directories.
 * Copy `README.md`, put project-specific information at the top, and edit.
-* Add a license, possibly by copying
-`LICENSE`.
+* Choose a license (currently, for code, the Apache license), put it in `./LICENSE` (for GitHub) as well as `./LICENSES/` (for the license checks) and make sure files have SPDX headers.
 * Rename
 `include/tooling_demo_cpp`
 and `test/tooling_demo_cpp` to have the name of the actual project.
@@ -59,9 +58,13 @@ Any time there is a release, put in a PR to add this release of the Bazel module
     gh secret set BCR_PUBLISH_TOKEN --repo rogiervd/<module_repo>
     ```
 
-### Sphinx and Doxygen
+### Documentation building
+
+The documentation uses Sphinx and Doxygen.
+
+* Copy the bottom half of `MODULE.bazel`, for configuring the Python toolchain.
 * Copy `./documentation`.
-* Edit `conf.py`, and of course the actual documentation.
+* Edit `conf.py`, `BUILD.bazel`, and of course the actual documentation.
 * To run documentation generation on GitHub Actions, copy
 `.github/workflows/documentation.yml`.
 
