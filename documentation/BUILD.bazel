@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: Copyright 2026 Rogier van Dalen
+#
+# SPDX-License-Identifier: Apache-2.0
+
 # Build Sphinx documentation.
 # This first runs Doxygen to extract the C++ API documentation.
 # Since Sphinx is a Python tool, we use the rules_python extension to set up a

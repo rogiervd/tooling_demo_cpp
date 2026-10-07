@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: Copyright 2024 Rogier van Dalen
+//
+// SPDX-License-Identifier: Apache-2.0
+
 #include "tooling_demo_cpp/add_two.hpp"
 
 // Ignore warnings caused by Google Test macros.
