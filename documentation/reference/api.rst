@@ -1,6 +1,6 @@
 .. SPDX-FileCopyrightText: Copyright 2026 Rogier van Dalen
 ..
-.. SPDX-License-Identifier: Apache-2.0
+.. SPDX-License-Identifier: CC-BY-4.0
 
 Classes
 =======

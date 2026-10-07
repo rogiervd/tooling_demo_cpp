@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: Copyright 2026 Rogier van Dalen
+
+SPDX-License-Identifier: CC-BY-4.0
+-->
+
 # C++ tooling demo
 
 This is a demo of how to set up tooling for C++ with Bazel.

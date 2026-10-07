@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: Copyright 2024 Rogier van Dalen
+#
+# SPDX-License-Identifier: Apache-2.0
 name: Static checks
 # Run clang-tidy.
 # This requires a compile_commands.json file, which is the reason why this is

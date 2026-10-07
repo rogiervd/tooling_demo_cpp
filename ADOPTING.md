@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: Copyright 2026 Rogier van Dalen
+
+SPDX-License-Identifier: CC-BY-4.0
+-->
+
 # Adopting this framework for a real project
 
 The point of this repository is as a framework for new or existing projects.
