@@ -1,7 +1,3 @@
-# SPDX-FileCopyrightText: Copyright 2026 Rogier van Dalen
-#
-# SPDX-License-Identifier: Apache-2.0
-
 # Template for the configuration file for the Sphinx documentation generator.
 
 # Change these to the correct values for your project.
