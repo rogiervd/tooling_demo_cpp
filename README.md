@@ -71,6 +71,32 @@ To run the pre-commit checks before every commit:
 pre-commit install
 ```
 
+### Licensing
+
+Licensing and copyright information follows the [REUSE specification](https://reuse.software) by the FSF Europe, and is checked as part of the pre-commit checks.
+By default, this checks only the files that pre-commit passes, i.e. files tracked by git.
+CI also checks the whole project, e.g. that every licence in `LICENSES/` is used and present; to run this locally, run
+```
+pre-commit run reuse --hook-stage manual --all-files
+```
+This also checks files that are not tracked by git.
+
+Licences:
+
+- Code (C++, Python, Bazel, YAML) is licensed under Apache-2.0, with an SPDX header in each file.
+- Documentation (reStructuredText, Markdown) is licensed under CC-BY-4.0, with an SPDX header in each file.
+- Configuration files are dedicated to the public domain under CC0-1.0, through `REUSE.toml`.
+
+The full licence texts are in `LICENSES/`.
+
+To add a header to a new file:
+```
+pip install reuse
+reuse annotate --copyright="Rogier van Dalen" --license=Apache-2.0 --copyright-prefix=spdx-string <file>
+```
+For documentation, use `--license=CC-BY-4.0`.
+For Bazel files, add `--style=python`.
+
 ### Static checks
 
 Linting:
