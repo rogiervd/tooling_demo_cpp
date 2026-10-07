@@ -11,7 +11,7 @@
 
 BOOST_AUTO_TEST_CASE(AddTwo)
 {
-    const tooling_demo_cpp::AddTwo add_two;
+    tooling_demo_cpp::AddTwo const add_two;
     BOOST_TEST(add_two(70) == 72);
 }
 
