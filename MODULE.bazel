@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: Copyright 2024 Rogier van Dalen
+#
+# SPDX-License-Identifier: Apache-2.0
+
 module(
     name = "tooling_demo_cpp",
     version = "0.2.4",

@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: Copyright 2026 Rogier van Dalen
+#
+# SPDX-License-Identifier: Apache-2.0
+
 # Define the tests.
 # Each test should be a separate cc_test target.
 # It is not possible to use a for loop in BUILD.bazel, but it is possible to

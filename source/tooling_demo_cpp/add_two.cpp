@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: Copyright 2026 Rogier van Dalen
+//
+// SPDX-License-Identifier: Apache-2.0
+
 #include "tooling_demo_cpp/add_two.hpp"
 
 #include <boost/rational.hpp>
