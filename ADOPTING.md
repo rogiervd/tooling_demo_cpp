@@ -29,8 +29,7 @@ This framework is fairly opinionated:
 `MODULE.bazel`,
 and the `BUILD.bazel` files in various directories.
 * Copy `README.md`, put project-specific information at the top, and edit.
-* Add a license, possibly by copying
-`LICENSE`.
+* Choose a license (currently, for code, the Apache license), put it in `./LICENSE` (for GitHub) as well as `./LICENSES/` (for the license checks) and make sure files have SPDX headers.
 * Rename
 `include/tooling_demo_cpp`
 and `test/tooling_demo_cpp` to have the name of the actual project.
