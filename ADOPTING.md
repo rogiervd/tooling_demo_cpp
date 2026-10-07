@@ -53,9 +53,13 @@ Any time there is a release, put in a PR to add this release of the Bazel module
     gh secret set BCR_PUBLISH_TOKEN --repo rogiervd/<module_repo>
     ```
 
-### Sphinx and Doxygen
+### Documentation building
+
+The documentation uses Sphinx and Doxygen.
+
+* Copy the bottom half of `MODULE.bazel`, for configuring the Python toolchain.
 * Copy `./documentation`.
-* Edit `conf.py`, and of course the actual documentation.
+* Edit `conf.py`, `BUILD.bazel`, and of course the actual documentation.
 * To run documentation generation on GitHub Actions, copy
 `.github/workflows/documentation.yml`.
 
