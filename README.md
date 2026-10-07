@@ -65,6 +65,19 @@ To run the pre-commit checks before every commit:
 pre-commit install
 ```
 
+### Licensing
+
+Licensing and copyright information follows the [REUSE specification](https://reuse.software) by the FSF Europe, and is checked by `reuse lint` as part of the pre-commit checks.
+Source files (C++, Python, Bazel) carry `SPDX-FileCopyrightText` and `SPDX-License-Identifier` headers; other files are covered by `REUSE.toml`.
+The full licence text is in `LICENSES/`.
+
+To add a header to a new source file:
+```
+pip install reuse
+reuse annotate --copyright="Rogier van Dalen" --license=Apache-2.0 --copyright-prefix=spdx-string <file>
+```
+For Bazel files, add `--style=python`.
+
 ### Static checks
 
 Linting:

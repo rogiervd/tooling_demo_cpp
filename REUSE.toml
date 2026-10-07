@@ -1,0 +1,25 @@
+version = 1
+
+# Files that cannot easily carry a licence header (configuration, data,
+# documentation).
+# Source code (C++, Python, Bazel) carries SPDX headers in the file itself.
+[[annotations]]
+path = [
+  ".bazelrc",
+  ".bazelversion",
+  ".bcr/**",
+  ".clang-format",
+  ".clang-tidy",
+  ".github/**",
+  ".gitignore",
+  ".pre-commit-config.yaml",
+  ".vscode/**",
+  ".yamllint.yaml",
+  "**.md",
+  "documentation/**.rst",
+  "documentation/requirements.in",
+  "documentation/requirements.txt",
+]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2024-2026 Rogier van Dalen"
+SPDX-License-Identifier = "Apache-2.0"

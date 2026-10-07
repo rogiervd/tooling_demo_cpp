@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: Copyright 2024 Rogier van Dalen
+//
+// SPDX-License-Identifier: Apache-2.0
+
 #ifndef TOOLING_DEMO_CPP_ADD_TWO_HPP
 #define TOOLING_DEMO_CPP_ADD_TWO_HPP
 

@@ -33,6 +33,12 @@ repos:
     rev: v1.3.5
     hooks:
       - id: clang-format
+  # Check licensing and copyright information, following the REUSE
+  # specification by the FSF Europe: https://reuse.software
+  - repo: https://github.com/fsfe/reuse-tool
+    rev: v6.2.0
+    hooks:
+      - id: reuse
 
 # Not used, on purpose:
 # actionlint has false positives e.g. when a new image is released.
