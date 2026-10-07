@@ -42,9 +42,9 @@ doxygen(
 sphinx_build_binary(
     name = "sphinx-build",
     deps = [
-        "@pypi//breathe",
-        "@pypi//sphinx",
-        "@pypi//sphinx_rtd_theme",
+        "@tooling_demo_cpp_pypi//breathe",
+        "@tooling_demo_cpp_pypi//sphinx",
+        "@tooling_demo_cpp_pypi//sphinx_rtd_theme",
     ],
 )
 
