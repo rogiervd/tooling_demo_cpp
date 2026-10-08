@@ -51,6 +51,19 @@ repos:
       #   pre-commit run reuse --hook-stage manual --all-files
       - id: reuse
         stages: [manual]
+  - repo: local
+    hooks:
+      # Check that SPDX copyright notices include the current year, and add it
+      # where it is missing. This is meant for the files that a pull request
+      # changes, so it runs only when asked for, e.g.
+      #   pre-commit run copyright-year --hook-stage manual \
+      #       --from-ref origin/main --to-ref HEAD
+      - id: copyright-year
+        name: copyright year
+        entry: tool/check_copyright_year.py --fix
+        language: python
+        types: [text]
+        stages: [manual]
 
 # Not used, on purpose:
 # actionlint has false positives e.g. when a new image is released.

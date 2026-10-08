@@ -97,6 +97,16 @@ reuse annotate --copyright="Rogier van Dalen" --license=Apache-2.0 --copyright-p
 For documentation, use `--license=CC-BY-4.0`.
 For Bazel files, add `--style=python`.
 
+In pull requests, CI checks that each changed file with an SPDX copyright header has the current year in at least one `SPDX-FileCopyrightText` line.
+This check is not required, since e.g. a pull request that only reformats code need not update the year.
+To add the year to the files that your branch changes, run
+```
+pre-commit run copyright-year --hook-stage manual --from-ref origin/main --to-ref HEAD
+```
+For example, if the current year is 2026, `2025` becomes `2025-2026`, and `2024` becomes `2024, 2026`.
+If a file has several copyright lines, this changes the one with your `git config user.name`.
+The script is `tool/check_copyright_year.py`.
+
 ### Static checks
 
 Linting:
