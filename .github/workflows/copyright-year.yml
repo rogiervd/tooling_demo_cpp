@@ -1,0 +1,22 @@
+# SPDX-FileCopyrightText: Copyright 2026 Rogier van Dalen
+#
+# SPDX-License-Identifier: Apache-2.0
+# Check that the files that a pull request changes have the current year in
+# their copyright notice. This is not a required check, since e.g. a pull
+# request that only reformats code need not update the year.
+name: Copyright year
+on:
+  pull_request:
+    branches: [main, develop, test-github-actions]
+jobs:
+  copyright-year:
+    runs-on: ubuntu-26.04
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          # Finding the changed files needs the history.
+          fetch-depth: 0
+      - uses: actions/setup-python@v3
+      - uses: pre-commit/action@v3.0.1
+        with:
+          extra_args: copyright-year --hook-stage manual --from-ref ${{ github.event.pull_request.base.sha }} --to-ref ${{ github.event.pull_request.head.sha }}
