@@ -68,7 +68,7 @@ The documentation uses Sphinx and Doxygen.
 * To run documentation generation on GitHub Actions, copy
 `.github/workflows/documentation.yml`.
 
-#### Updating the Python packages automatically
+### Updating the Python packages automatically
 `documentation/requirements.txt` pins the versions of the Python packages.
 To upgrade them by hand, run
 `bazel run //documentation:requirements.run -- --upgrade`.
