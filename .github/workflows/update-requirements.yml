@@ -24,8 +24,11 @@ jobs:
           # Share repository cache between workflows.
           repository-cache: true
       # requirements.update does not take extra arguments, so use
-      # requirements.run to pass --upgrade to uv.
-      - run: bazel run //documentation:requirements.run -- --upgrade
+      # requirements.run to pass arguments to uv.
+      # Only use package versions that have been out for at least 14 days.
+      - run: |
+          bazel run //documentation:requirements.run -- --upgrade \
+            --exclude-newer "$(date -u -d '14 days ago' +%Y-%m-%dT%H:%M:%SZ)"
       - uses: peter-evans/create-pull-request@v8.1.1
         with:
           # Pull requests created with the default GITHUB_TOKEN do not trigger
