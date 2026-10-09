@@ -1,0 +1,8 @@
+# Commits that only reformat code, for git blame to skip.
+# GitHub uses this file automatically. To use it locally, run
+#   git config blame.ignoreRevsFile .git-blame-ignore-revs
+
+# Fix formatting (#10)
+5e84b3eca986d29d06dfd12f8c1f362197539e13
+# Apply formatting with new clang-format settings (#49)
+f6cd7f8fc5ef45c4a1aee10c1aad5bd0a9535dac
