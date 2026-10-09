@@ -1,0 +1,62 @@
+# SPDX-FileCopyrightText: Copyright 2026 Rogier van Dalen
+#
+# SPDX-License-Identifier: Apache-2.0
+# Every two months, upgrade the Python packages in
+# documentation/requirements.txt and open a pull request with the result.
+name: Update Python requirements
+on:
+  schedule:
+    # Cron cannot express "last Saturday of the month", so run every Saturday
+    # in even months and skip all but the last one below.
+    - cron: "17 6 * 2,4,6,8,10,12 6"
+  workflow_dispatch:
+permissions:
+  contents: write
+  pull-requests: write
+jobs:
+  update-requirements:
+    runs-on: ubuntu-26.04
+    steps:
+      - name: Check whether this is the last Saturday of the month
+        id: check
+        run: |
+          if [ "${{ github.event_name }}" != "schedule" ] ||
+             [ "$(date -u -d '+7 days' +%m)" != "$(date -u +%m)" ]; then
+            echo "run=true" >> "$GITHUB_OUTPUT"
+          fi
+      - if: steps.check.outputs.run == 'true'
+        uses: actions/checkout@v7
+      - if: steps.check.outputs.run == 'true'
+        uses: bazel-contrib/setup-bazel@0.19.0
+        with:
+          # Avoid downloading Bazel every time.
+          bazelisk-cache: true
+          # Share repository cache between workflows.
+          repository-cache: true
+      # requirements.update does not take extra arguments, so use
+      # requirements.run to pass --upgrade to uv.
+      - if: steps.check.outputs.run == 'true'
+        run: bazel run //documentation:requirements.run -- --upgrade
+      - if: steps.check.outputs.run == 'true'
+        uses: peter-evans/create-pull-request@v8.1.1
+        with:
+          # Pull requests created with the default GITHUB_TOKEN do not trigger
+          # other workflows, so CI would not run on them.
+          # Set the REQUIREMENTS_UPDATE_TOKEN secret to a token that can push
+          # and create pull requests to make CI run.
+          token: ${{ secrets.REQUIREMENTS_UPDATE_TOKEN || github.token }}
+          branch: automation/update-requirements
+          delete-branch: true
+          add-paths: documentation/requirements.txt
+          commit-message: Update Python documentation dependencies
+          title: Update Python documentation dependencies
+          body: |
+            Upgrade the Python packages in `documentation/requirements.txt`
+            with
+
+            ```
+            bazel run //documentation:requirements.run -- --upgrade
+            ```
+
+            This pull request was created by the
+            `${{ github.workflow }}` workflow.
