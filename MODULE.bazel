@@ -7,7 +7,7 @@ module(
     version = "0.2.4",
 )
 
-bazel_dep(name = "rules_cc", version = "0.2.22")
+bazel_dep(name = "rules_cc", version = "0.2.26")
 
 # This demo uses Boost.Rational.
 bazel_dep(name = "boost.rational", version = "1.90.0.bcr.1")
@@ -30,8 +30,8 @@ git_override(
 
 # Python packages, which are solely for generating documentation with Sphinx.
 # See documentation/BUILD.bazel.
-bazel_dep(name = "rules_python", version = "2.3.3")
-bazel_dep(name = "sphinxdocs", version = "2.3.3")
+bazel_dep(name = "rules_python", version = "2.4.1")
+bazel_dep(name = "sphinxdocs", version = "2.4.1")
 bazel_dep(name = "platforms", version = "1.1.0")
 
 # Python toolchain
