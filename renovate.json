@@ -24,8 +24,8 @@
       "enabled": false
     },
     {
-      "matchDepNames": ["rules_python", "sphinxdocs"],
-      "groupName": "rules_python"
+      "matchDepNames": ["rules_cc", "rules_python", "sphinxdocs"],
+      "groupName": "Bazel rules"
     },
     {
       "matchDepNames": ["boost.**"],
@@ -34,6 +34,12 @@
     {
       "matchManagers": ["github-actions"],
       "groupName": "GitHub Actions"
+    },
+    {
+      "description": "clang-format can change the formatting, so update it separately",
+      "matchManagers": ["pre-commit"],
+      "matchDepNames": ["!pre-commit/mirrors-clang-format"],
+      "groupName": "pre-commit hooks"
     }
   ]
 }
