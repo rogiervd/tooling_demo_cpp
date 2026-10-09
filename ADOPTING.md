@@ -68,6 +68,21 @@ The documentation uses Sphinx and Doxygen.
 * To run documentation generation on GitHub Actions, copy
 `.github/workflows/documentation.yml`.
 
+### Updating the Python packages automatically
+`documentation/requirements.txt` pins the versions of the Python packages.
+To upgrade them by hand, run
+`bazel run //documentation:requirements.run -- --upgrade`.
+(`bazel run //documentation:requirements.update` does not upgrade packages that are already pinned.)
+
+To have GitHub Actions do this on the first day of every odd month and open a pull request with the result:
+* Copy `.github/workflows/update-requirements.yml`.
+* On GitHub, go to the repository's Settings -> Actions -> General, and under "Workflow permissions" check "Allow GitHub Actions to create and approve pull requests".
+  Without this, the workflow fails when it tries to open the pull request.
+  (If this is greyed out, it needs to be allowed for the organisation first.)
+* CI does not run automatically on the pull requests this workflow opens, because GitHub does not trigger workflows for pull requests opened with the default `GITHUB_TOKEN`.
+  To run CI, close and reopen the pull request.
+* To test the workflow without waiting, start it by hand from the repository's Actions tab ("Update Python requirements" -> "Run workflow").
+
 
 ### GitHub Actions
 
