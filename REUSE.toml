@@ -16,6 +16,7 @@ path = [
   ".vscode/**",
   ".yamllint.yaml",
   "MODULE.bazel.lock",
+  "renovate.json",
   "documentation/conf.py",
   "documentation/requirements.in",
   "documentation/requirements.txt",
