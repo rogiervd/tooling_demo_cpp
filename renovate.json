@@ -1,7 +1,8 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:recommended"],
-  "schedule": ["* * 1 1,3,5,7,9,11 *"],
+  "schedule": ["* * 1 5,11 *"],
+  "minimumReleaseAge": "14 days",
   "pre-commit": { "enabled": true },
   "pip_requirements": { "enabled": false },
   "customManagers": [
@@ -18,6 +19,15 @@
     }
   ],
   "packageRules": [
+    {
+      "description": "Wait longer before major and minor updates; patch and other updates use the 14 days above",
+      "matchUpdateTypes": ["major"],
+      "minimumReleaseAge": "90 days"
+    },
+    {
+      "matchUpdateTypes": ["minor"],
+      "minimumReleaseAge": "40 days"
+    },
     {
       "description": "Updated by the custom manager above instead",
       "matchManagers": ["bazel-module"],

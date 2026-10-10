@@ -74,7 +74,7 @@ To upgrade them by hand, run
 `bazel run //documentation:requirements.run -- --upgrade`.
 (`bazel run //documentation:requirements.update` does not upgrade packages that are already pinned.)
 
-To have GitHub Actions do this on the first day of every odd month and open a pull request with the result:
+To have GitHub Actions do this on the first day of May and November and open a pull request with the result:
 * Copy `.github/workflows/update-requirements.yml`.
 * On GitHub, go to the repository's Settings -> Actions -> General, and under "Workflow permissions" check "Allow GitHub Actions to create and approve pull requests".
   Without this, the workflow fails when it tries to open the pull request.
