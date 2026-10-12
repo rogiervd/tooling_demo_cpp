@@ -104,6 +104,9 @@ and `.yamllint.yaml`.
 * To run linting on GitHub Actions, copy
 `.github/workflows/lint.yml`.
 
+### Checking that headers include everything they need.
+* Copy `.github/workflows/parse_headers.yml`.
+* To run this, say `bazel build --process_headers_in_dependencies --output_groups=compilation_outputs //:<library_target>`.
 
 ### Running with sanitisers
 * To run tests with sanitisers on GitHub Actions, copy
