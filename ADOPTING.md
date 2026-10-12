@@ -106,6 +106,7 @@ and `.yamllint.yaml`.
 
 ### Checking that headers include everything they need.
 * Copy `.github/workflows/parse_headers.yml`.
+* Ensure the Bazel target has `features = ["parse_headers"]`.
 * To run this, say `bazel build --process_headers_in_dependencies --output_groups=compilation_outputs //:<library_target>`.
 
 ### Running with sanitisers
