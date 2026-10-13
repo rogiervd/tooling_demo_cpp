@@ -71,6 +71,14 @@ To run the pre-commit checks before every commit:
 pre-commit install
 ```
 
+Check that header files include all that they need:
+```
+bazel build --process_headers_in_dependencies --output_groups=compilation_outputs //:<library_target>
+```
+
+`--process_headers_in_dependencies` is necessary to perform this check at all (the flag seems misnamed).
+`--output_groups=compilation_outputs` leaves out headers in the dependencies.
+
 ### Licensing
 
 Licensing and copyright information follows the [REUSE specification](https://reuse.software) by the FSF Europe, and is checked as part of the pre-commit checks.
