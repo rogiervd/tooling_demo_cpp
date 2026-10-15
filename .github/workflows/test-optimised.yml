@@ -10,16 +10,19 @@ on:
   workflow_dispatch:
 jobs:
   test-release:
-    runs-on: ${{ matrix.os || 'ubuntu-26.04' }}
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        compiler: [gcc, clang]
-        # On Windows, use MSVC and clang-cl.
+        # A selection of operating system and compiler combinations.
         include:
+          - os: ubuntu-26.04
+            compiler: gcc
+          - os: ubuntu-26.04
+            compiler: clang
+          - os: macos-26
+            compiler: clang
           - os: windows-2025
             compiler: msvc
-          - os: windows-2025
-            compiler: clang-cl
     steps:
       - uses: actions/checkout@v7
       - uses: bazel-contrib/setup-bazel@0.19.0
