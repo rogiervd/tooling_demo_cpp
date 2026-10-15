@@ -33,8 +33,11 @@ build:windows --cxxopt=/std:c++17
 # warnings in those headers.
 build:windows --features=external_include_paths
 # Switch on warnings and make them errors, for this project's own source files
-# only (not for dependencies under external/).
-build:windows --per_file_copt=.*,-external/.*@/W4,/WX
+# only, not for dependencies.
+# Bazel applies these options if either the source file's path or its label
+# matches, so exclude both the path (external/...) and the label
+# (@@<repository>+//...) of files in dependencies.
+build:windows --per_file_copt=.*,-^external/,-[+]//@/W4,/WX
 
 # Compiler selection.
 # These use the C++ toolchain that rules_cc auto-configures from the compiler
