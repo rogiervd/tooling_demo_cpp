@@ -13,10 +13,28 @@ common --registry https://bcr.bazel.build/
 
 # Arguments for C++ builds.
 # All warnings are switched on and generate errors.
-# TODO does this work on Windows?
-build --cxxopt=-std=c++17
-build --cxxopt=-Werror
-build --cxxopt=-Wall
+# The flags differ between GCC/Clang and MSVC, so pick them based on the host
+# operating system: lines with build:linux, build:macos, or build:windows are
+# used automatically on that operating system.
+common --enable_platform_specific_config
+
+build:linux --cxxopt=-std=c++17
+build:linux --cxxopt=-Werror
+build:linux --cxxopt=-Wall
+
+build:macos --cxxopt=-std=c++17
+build:macos --cxxopt=-Werror
+build:macos --cxxopt=-Wall
+
+# Windows uses MSVC (cl.exe).
+build:windows --cxxopt=/std:c++17
+# Treat headers included with <...> (the standard library and dependencies)
+# as external, and do not report warnings in them.
+build:windows --cxxopt=/external:anglebrackets
+build:windows --cxxopt=/external:W0
+# Switch on warnings and make them errors, for this project's own source files
+# only (not for dependencies under external/).
+build:windows --per_file_copt=.*,-external/.*@/W4,/WX
 
 # Compiler selection.
 # These use the C++ toolchain that rules_cc auto-configures from the compiler

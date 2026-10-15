@@ -26,3 +26,18 @@ jobs:
           # Share repository cache between workflows.
           repository-cache: true
       - run: bazel test --keep_going --config=${{ matrix.compiler }} //test/...
+  test-windows:
+    # Windows uses MSVC, Bazel's default compiler there, so there is no compiler
+    # matrix.
+    runs-on: windows-2025
+    steps:
+      - uses: actions/checkout@v7
+      - uses: bazel-contrib/setup-bazel@0.19.0
+        with:
+          # Avoid downloading Bazel every time.
+          bazelisk-cache: true
+          # Store build cache per workflow.
+          disk-cache: ${{ github.workflow }}
+          # Share repository cache between workflows.
+          repository-cache: true
+      - run: bazel test --keep_going --test_output=errors //test/...
