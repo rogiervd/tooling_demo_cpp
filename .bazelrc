@@ -56,7 +56,7 @@ build:clang --repo_env=CC=clang
 build:msvc --extra_toolchains=@local_config_cc//:cc-toolchain-x64_windows
 
 build:clang-cl --extra_toolchains=@local_config_cc//:cc-toolchain-x64_windows-clang-cl
-build:clang-cl --extra_execution_platforms=//tool:windows_clang_cl
+build:clang-cl --extra_execution_platforms=//:windows_clang_cl
 
 # Configuration for builds with address sanitiser.
 # This can be selected with
