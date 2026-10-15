@@ -26,12 +26,12 @@ build:macos --cxxopt=-std=c++17
 build:macos --cxxopt=-Werror
 build:macos --cxxopt=-Wall
 
-# Windows uses MSVC (cl.exe).
+# Windows uses MSVC (cl.exe) by default, or clang-cl with --config=clang-cl.
+# Both take MSVC-style flags.
 build:windows --cxxopt=/std:c++17
-# Treat headers included with <...> (the standard library and dependencies)
-# as external, and do not report warnings in them.
-build:windows --cxxopt=/external:anglebrackets
-build:windows --cxxopt=/external:W0
+# Pass include paths of dependencies with /external:I, and do not report
+# warnings in those headers.
+build:windows --features=external_include_paths
 # Switch on warnings and make them errors, for this project's own source files
 # only (not for dependencies under external/).
 build:windows --per_file_copt=.*,-external/.*@/W4,/WX
@@ -44,6 +44,16 @@ build:windows --per_file_copt=.*,-external/.*@/W4,/WX
 build:gcc --repo_env=CC=gcc
 
 build:clang --repo_env=CC=clang
+
+# On Windows:
+#   bazel ... --config=msvc
+#   bazel ... --config=clang-cl
+# clang-cl must be installed; rules_cc looks for it in BAZEL_LLVM or the
+# default LLVM installation directory.
+build:msvc --extra_toolchains=@local_config_cc//:cc-toolchain-x64_windows
+
+build:clang-cl --extra_toolchains=@local_config_cc//:cc-toolchain-x64_windows-clang-cl
+build:clang-cl --extra_execution_platforms=//tool:windows_clang_cl
 
 # Configuration for builds with address sanitiser.
 # This can be selected with

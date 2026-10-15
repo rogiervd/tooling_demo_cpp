@@ -9,6 +9,15 @@ module(
 
 bazel_dep(name = "rules_cc", version = "0.2.26")
 
+# The auto-configured C++ toolchains, so that .bazelrc can select one of them
+# explicitly (for --config=msvc and --config=clang-cl on Windows).
+cc_configure = use_extension(
+    "@rules_cc//cc:extensions.bzl",
+    "cc_configure_extension",
+    dev_dependency = True,
+)
+use_repo(cc_configure, "local_config_cc")
+
 # This demo uses Boost.Rational.
 bazel_dep(name = "boost.rational", version = "1.90.0.bcr.1")
 
