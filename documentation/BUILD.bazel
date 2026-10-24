@@ -35,7 +35,10 @@ doxygen(
     name = "doxygen_xml",
     # Explicitly depend on the relevant files, as a filegroup in ../BUILD.bazel.
     # The examples are listed too so that they are available to \include.
-    srcs = ["//:doc_sources"] + glob(["example/*.cpp"]),
+    srcs = [
+        "//:doc_sources",
+        "//documentation/example:sources",
+    ],
     outs = ["xml"],
     example_path = ["documentation/example"],
     # Each file in srcs is automatically passed to Doxygen as input.
@@ -64,9 +67,10 @@ sphinx_docs_library(
     srcs = glob([
         "*.rst",
         "reference/*.rst",
+    ]) + [
         # So that Sphinx can quote from the examples.
-        "example/*.cpp",
-    ]),
+        "//documentation/example:sources",
+    ],
 )
 
 # The Doxygen-generated XML sources.

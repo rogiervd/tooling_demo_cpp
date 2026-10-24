@@ -20,8 +20,13 @@ load("@rules_cc//cc:defs.bzl", "cc_test")
     for example_file_name in glob(["*.cpp"])
 ]
 
-# Make the examples in the example/ subdirectory available to //test, so they
-# can be run with the unit tests.
+# The examples, for Doxygen and Sphinx to include.
+filegroup(
+    name = "sources",
+    srcs = glob(["*.cpp"]),
+    visibility = ["//documentation:__pkg__"],
+)
+
 # All tests in this package.
 test_suite(
     name = "examples",
