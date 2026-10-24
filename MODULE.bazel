@@ -21,9 +21,10 @@ use_repo(cc_configure, "local_config_cc")
 # This demo uses Boost.Rational.
 bazel_dep(name = "boost.rational", version = "1.90.0.bcr.1")
 
-# Test frameworks that can be used:
-bazel_dep(name = "googletest", version = "1.18.0.bcr.1")
-bazel_dep(name = "boost.test", version = "1.90.0.bcr.1")
+# Test frameworks that can be used.
+# "dev_dependency = True" because these are only used by the tests.
+bazel_dep(name = "googletest", version = "1.18.0.bcr.1", dev_dependency = True)
+bazel_dep(name = "boost.test", version = "1.90.0.bcr.1", dev_dependency = True)
 
 # IDEs as well as other tools can use a compile_commands.json databse to know
 # how files are compiled.
