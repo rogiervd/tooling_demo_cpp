@@ -33,7 +33,10 @@ int main()
         // [end-sphinx-example]
     }
 
-    // Example for include in Doxygen documentation.
+    // Example for inclusion in Doxygen documentation with \snippet.
+    // For Doxygen, the tag needs to be in exactly this format, with //! and the
+    // square brackets. The tag inside the square brackets matches the second
+    // argument to \snippet.
     {
         //! [doxygen-example]
         tooling_demo_cpp::AddTwo const add_two;
