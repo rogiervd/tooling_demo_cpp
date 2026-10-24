@@ -1,0 +1,29 @@
+# SPDX-FileCopyrightText: Copyright 2026 Rogier van Dalen
+#
+# SPDX-License-Identifier: Apache-2.0
+
+# Allow the examples that are used in the documentation to be run in tests.
+# These can be run separately by saying
+#   bazel test //documentation/example:examples
+# but they should be referenced in test/BUILD.bazel so they run with the unit
+# tests.
+
+load("@rules_cc//cc:defs.bzl", "cc_test")
+
+[
+    cc_test(
+        name = "test_" + example_file_name.removesuffix(".cpp"),
+        size = "small",
+        srcs = [example_file_name],
+        deps = ["//:tooling_demo_cpp"],
+    )
+    for example_file_name in glob(["*.cpp"])
+]
+
+# Make the examples in the example/ subdirectory available to //test, so they
+# can be run with the unit tests.
+# All tests in this package.
+test_suite(
+    name = "examples",
+    visibility = ["//test:__subpackages__"],
+)

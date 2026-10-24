@@ -34,12 +34,18 @@ lock(
 doxygen(
     name = "doxygen_xml",
     # Explicitly depend on the relevant files, as a filegroup in ../BUILD.bazel.
-    srcs = ["//:doc_sources"],
+    # The examples are listed too so that they are available to \include.
+    srcs = ["//:doc_sources"] + glob(["example/*.cpp"]),
     outs = ["xml"],
+    example_path = ["documentation/example"],
+    # Each file in srcs is automatically passed to Doxygen as input.
+    # However, the examples then needs to be excluded again.
+    exclude = ["documentation/example"],
     generate_html = False,
     # The XML output is used by Breathe to generate the Sphinx documentation.
     generate_xml = True,
     project_name = "tooling_demo_cpp",
+    warn_as_error = "FAIL_ON_WARNINGS",
 )
 
 # Install the Sphinx binary, and modules that the documentation needs.
@@ -58,6 +64,8 @@ sphinx_docs_library(
     srcs = glob([
         "*.rst",
         "reference/*.rst",
+        # So that Sphinx can quote from the examples.
+        "example/*.cpp",
     ]),
 )
 
@@ -70,6 +78,7 @@ sphinx_docs_library(
 sphinx_docs(
     name = "documentation",
     config = "conf.py",
+    extra_opts = ["-W"],
     formats = ["html"],
     sphinx = ":sphinx-build",
     deps = [
