@@ -141,6 +141,8 @@ bazel run //documentation:requirements.update
 bazel build //documentation:documentation
 ```
 
+To see all the warnings (they will always show up in CI), use `--strategy=SphinxBuildDocs=sandboxed` or delete the output.
+
 To serve the documentation from a webserver on `localhost`:
 
 ```
