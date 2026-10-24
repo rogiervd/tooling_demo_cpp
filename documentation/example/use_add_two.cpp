@@ -10,8 +10,8 @@
  * actually work.
  * The good thing about not using Google Test or such is that the documentation
  * does not rely on it.
- * On the other hand: the assert()s are not executed in optimised builds.
- * Oh well.
+ * The NDEBUG macro is undefined so that assert() is not disabled, and there are
+ * no warnings about unused variables.
  */
 
 #include <cassert>
