@@ -15,6 +15,10 @@ load("@rules_cc//cc:defs.bzl", "cc_test")
         name = "test_" + example_file_name.removesuffix(".cpp"),
         size = "small",
         srcs = [example_file_name],
+        # The examples will often use assert().
+        # In release builds, assert() is disabled, leading to errors about unused variables.
+        # So undefine NDEBUG.
+        copts = ["-UNDEBUG"],
         deps = ["//:tooling_demo_cpp"],
     )
     for example_file_name in glob(["*.cpp"])
