@@ -40,9 +40,9 @@ git_override(
 
 # Python packages, which are solely for generating documentation with Sphinx.
 # See documentation/BUILD.bazel.
-bazel_dep(name = "rules_python", version = "2.4.1")
-bazel_dep(name = "sphinxdocs", version = "2.4.1")
-bazel_dep(name = "platforms", version = "1.1.0")
+bazel_dep(name = "rules_python", version = "2.4.1", dev_dependency = True)
+bazel_dep(name = "sphinxdocs", version = "2.4.1", dev_dependency = True)
+bazel_dep(name = "platforms", version = "1.1.0", dev_dependency = True)
 
 # Python toolchain
 python = use_extension("@rules_python//python/extensions:python.bzl", "python")
@@ -72,7 +72,7 @@ pip.parse(
 use_repo(pip, "tooling_demo_cpp_pypi")
 
 # Doxygen, for generating C++ API documentation.
-bazel_dep(name = "rules_doxygen", version = "2.6.4")
+bazel_dep(name = "rules_doxygen", version = "2.6.4", dev_dependency = True)
 
 doxygen_extension = use_extension("@rules_doxygen//:extensions.bzl", "doxygen_extension")
 use_repo(doxygen_extension, "doxygen")
