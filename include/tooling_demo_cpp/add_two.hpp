@@ -9,6 +9,9 @@ namespace tooling_demo_cpp {
 
 /**
  * @brief A functor that adds two to an integer value.
+ *
+ * An example of how to use this class:
+ * \snippet{trimleft} use_add_two.cpp doxygen-example
  */
 class AddTwo
 {
