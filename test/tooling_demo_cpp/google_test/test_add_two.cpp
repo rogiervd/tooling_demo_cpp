@@ -9,7 +9,7 @@
 // bugprone-throwing-static-initialization, cert-err58-cpp,
 // cppcoreguidelines-owning-memory, modernize-use-scoped-lock)
 
-#include <gtest/gtest.h>
+#include "gtest/gtest.h"
 
 TEST(AddTwo, Fifty)
 {
