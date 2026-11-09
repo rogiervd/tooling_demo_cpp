@@ -44,7 +44,6 @@ jobs:
           # Share repository cache between jobs and workflows.
           repository-cache: true
       - run: bazel test --keep_going --config=${{ matrix.compiler }} //test/...
-
   test-release:
     runs-on: ${{ matrix.os }}
     strategy:
@@ -67,7 +66,6 @@ jobs:
           disk-cache: ${{ github.job }}-${{ matrix.os }}-${{ matrix.compiler }}
           repository-cache: true
       - run: bazel test --keep_going -c opt --config=${{ matrix.compiler }} //test/...
-
   test-sanitizers:
     runs-on: ubuntu-26.04
     strategy:
@@ -81,7 +79,6 @@ jobs:
           disk-cache: ${{ github.job }}-${{ matrix.sanitizer }}
           repository-cache: true
       - run: bazel test --keep_going --config=clang --config=${{ matrix.sanitizer }} --test_output=errors //test/...
-
   test-valgrind:
     runs-on: ubuntu-26.04
     steps:
@@ -93,7 +90,6 @@ jobs:
           repository-cache: true
       - run: sudo apt update && sudo apt install -y valgrind
       - run: bazel test --keep_going --test_output=errors --run_under=valgrind //test/...
-
   coverage:
     # Any differences between coverage on different operating systems are
     # probably minor.
