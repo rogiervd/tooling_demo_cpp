@@ -24,7 +24,6 @@ jobs:
       # matrix when the first one fails.
       fail-fast: false
       matrix:
-        # Each entry is one job.
         # "flags" are extra arguments to Bazel.
         include:
           # Debug builds on a selection of operating system and compiler
