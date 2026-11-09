@@ -109,16 +109,20 @@ and `.yamllint.yaml`.
 * Ensure the Bazel target has `features = ["parse_headers"]`.
 * To run this, say `bazel build --process_headers_in_dependencies --output_groups=compilation_outputs //:<library_target>`.
 
-### Running with sanitisers
-* To run tests with sanitisers on GitHub Actions, copy
-`.github/workflows/sanitizers.yml`.
-* To run tests with Valgrind on GitHub Actions, copy
-`.github/workflows/valgrind.yml`
-* A lot of the details of how to call helpers are specified in `.bazelrc`.
+### Running tests
+To run the unit tests on GitHub Actions, copy `.github/workflows/test.yml`.
+This runs the tests in a number of ways, each as a separate job:
+* `test`: a debug build, on many operating systems and compilers.
+* `test-release`: an optimised build.
+* `test-sanitizers`: with the address and undefined behaviour sanitisers.
+* `test-valgrind`: under Valgrind.
+* `coverage`: measuring test coverage.
+
+Remove any jobs you do not want.
+A lot of the details of how to call helpers are specified in `.bazelrc`.
 
 ### Test coverage
-To run coverage on GitHub Actions,
-* Copy `.github/workflows/coverage.yml`.
+For the `coverage` job in `.github/workflows/test.yml` to upload results,
 * Get this repo set up on coveralls.io.
 * Add the Coveralls user to the repo on GitHub.
 

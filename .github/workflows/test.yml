@@ -2,12 +2,24 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 name: Unit tests
+# Run the unit tests in a number of different ways, each as a separate job:
+# - test: debug build, on many operating systems and compilers.
+# - test-release: optimised build, on a selection of those.
+# - test-sanitizers: with Clang and the address and undefined behaviour
+#   sanitizers.
+# - test-valgrind: under Valgrind.
+# - coverage: measure code coverage and upload it to Coveralls.
+# The jobs run in parallel. Remove any job that is not wanted.
 on:
   push:
     branches: [main, develop, test-github-actions]
   pull_request:
     branches: [main, develop, test-github-actions]
   workflow_dispatch:
+# Each job stores its Bazel disk cache under its own key, which includes the
+# job and its matrix values. A cache cannot be overwritten once saved, so if
+# jobs with different build configurations shared a key, only the first one to
+# finish would get a useful cache.
 jobs:
   test:
     runs-on: ${{ matrix.os }}
@@ -27,8 +39,79 @@ jobs:
         with:
           # Avoid downloading Bazel every time.
           bazelisk-cache: true
-          # Store build cache per workflow.
-          disk-cache: ${{ github.workflow }}
-          # Share repository cache between workflows.
+          # Store build cache per job and configuration.
+          disk-cache: ${{ github.job }}-${{ matrix.os }}-${{ matrix.compiler }}
+          # Share repository cache between jobs and workflows.
           repository-cache: true
       - run: bazel test --keep_going --config=${{ matrix.compiler }} //test/...
+
+  test-release:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        # A selection of operating system and compiler combinations.
+        include:
+          - os: ubuntu-26.04
+            compiler: gcc
+          - os: ubuntu-26.04
+            compiler: clang
+          - os: macos-26
+            compiler: clang
+          - os: windows-2025
+            compiler: msvc
+    steps:
+      - uses: actions/checkout@v7
+      - uses: bazel-contrib/setup-bazel@0.19.0
+        with:
+          bazelisk-cache: true
+          disk-cache: ${{ github.job }}-${{ matrix.os }}-${{ matrix.compiler }}
+          repository-cache: true
+      - run: bazel test --keep_going -c opt --config=${{ matrix.compiler }} //test/...
+
+  test-sanitizers:
+    runs-on: ubuntu-26.04
+    strategy:
+      matrix:
+        sanitizer: [asan, ubsan]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: bazel-contrib/setup-bazel@0.19.0
+        with:
+          bazelisk-cache: true
+          disk-cache: ${{ github.job }}-${{ matrix.sanitizer }}
+          repository-cache: true
+      - run: bazel test --keep_going --config=clang --config=${{ matrix.sanitizer }} --test_output=errors //test/...
+
+  test-valgrind:
+    runs-on: ubuntu-26.04
+    steps:
+      - uses: actions/checkout@v7
+      - uses: bazel-contrib/setup-bazel@0.19.0
+        with:
+          bazelisk-cache: true
+          disk-cache: ${{ github.job }}
+          repository-cache: true
+      - run: sudo apt update && sudo apt install -y valgrind
+      - run: bazel test --keep_going --test_output=errors --run_under=valgrind //test/...
+
+  coverage:
+    # Any differences between coverage on different operating systems are
+    # probably minor.
+    runs-on: ubuntu-26.04
+    steps:
+      - uses: actions/checkout@v7
+      - uses: bazel-contrib/setup-bazel@0.19.0
+        with:
+          bazelisk-cache: true
+          disk-cache: ${{ github.job }}
+          repository-cache: true
+      - run: bazel coverage //test/...
+      - run: wc bazel-out/_coverage/_coverage_report.dat
+      - name: Coveralls
+        uses: coverallsapp/github-action@v2
+        with:
+          file: bazel-out/_coverage/_coverage_report.dat
+          format: lcov
+        # To get pull requests comments, it may be necessary to invite the
+        # @coveralls user to have Write permissions.
+        # See https://github.com/marketplace/actions/coveralls-github-action
