@@ -24,22 +24,26 @@ jobs:
       # matrix when the first one fails.
       fail-fast: false
       matrix:
-        # Debug builds on combinations of these, except those excluded below.
-        os: [ubuntu-24.04, ubuntu-26.04, ubuntu-26.04-arm, macos-26]
-        compiler: [gcc, clang]
-        variant: [debug]
-        exclude:
-          - os: ubuntu-24.04
-            compiler: clang
-          - os: ubuntu-26.04-arm
-            compiler: gcc
-          - os: macos-26
-            compiler: gcc
-        # Each entry below sets a different "variant" from the combinations
-        # above, so it becomes a job of its own.
+        # Each entry is one job.
         # "flags" are extra arguments to Bazel.
         include:
-          # On Windows, use MSVC and clang-cl instead.
+          # Debug builds on a selection of operating system and compiler
+          # combinations.
+          - os: ubuntu-24.04
+            compiler: gcc
+            variant: debug
+          - os: ubuntu-26.04
+            compiler: gcc
+            variant: debug
+          - os: ubuntu-26.04
+            compiler: clang
+            variant: debug
+          - os: ubuntu-26.04-arm
+            compiler: clang
+            variant: debug
+          - os: macos-26
+            compiler: clang
+            variant: debug
           - os: windows-2025
             compiler: msvc
             variant: debug
