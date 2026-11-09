@@ -39,7 +39,7 @@ and the `BUILD.bazel` files in various directories.
 * Rename
 `include/tooling_demo_cpp`
 and `test/tooling_demo_cpp` to have the name of the actual project.
-* To run unit tests on GitHub Actions, copy `.github/workflows/test{,-optimised}.yml`.
+* To run unit tests on GitHub Actions, copy `.github/workflows/test.yml` (see "Running tests" below).
 
 ### Publishing a new release
 * Copy `.github/workflows/release.yml` and `tool/release.py`.
@@ -113,7 +113,7 @@ and `.yamllint.yaml`.
 To run the unit tests on GitHub Actions, copy `.github/workflows/test.yml`.
 This runs the tests in a number of variants, each a job in one matrix:
 * `debug`: a debug build, on many operating systems and compilers.
-* `release`: an optimised build.
+* `optimised`: an optimised build.
 * `asan`, `ubsan`: with the address and undefined behaviour sanitisers.
 * `valgrind`: under Valgrind.
 * `coverage`: measuring test coverage.
