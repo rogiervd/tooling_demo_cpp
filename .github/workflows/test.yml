@@ -28,9 +28,6 @@ jobs:
         os: [ubuntu-24.04, ubuntu-26.04, ubuntu-26.04-arm, macos-26]
         compiler: [gcc, clang]
         variant: [debug]
-        # Running every combination adds little, so test the older Ubuntu
-        # only with GCC and ARM only with Clang.
-        # On macOS, "gcc" is Apple Clang under another name.
         exclude:
           - os: ubuntu-24.04
             compiler: clang
