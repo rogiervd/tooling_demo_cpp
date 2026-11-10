@@ -26,4 +26,9 @@ Checks: >
 # -modernize-use-trailing-return-type,
 # -llvm-header-guard,
 
+CheckOptions:
+    # Mark some external headers as non-public, so misc-include-cleaner does
+    # not suggest internal headers.
+    misc-include-cleaner.IgnoreHeaders: "boost/test/.*;boost/optional/detail/.*"
+
 WarningsAsErrors: "*"
