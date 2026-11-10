@@ -51,7 +51,6 @@ repos:
     hooks:
       - id: clang-tidy
         args: [--version=23.1.4, --jobs=4]
-        files: '\.hpp$'
         stages: [manual]
   # Check licensing and copyright information, following the REUSE
   # specification by the FSF Europe: https://reuse.software
