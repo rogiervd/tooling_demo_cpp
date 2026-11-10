@@ -2,13 +2,11 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 name: Unit tests
-# Run the unit tests in a number of variants, from one matrix:
-# - debug: debug build, on many operating systems and compilers.
+# Run the unit tests in a number of types and environments:
+# - debug: debug build, on a few operating systems and compilers.
 # - optimised: optimised build, on a selection of those.
-# - asan, ubsan: with Clang and the address or undefined behaviour sanitizer.
-# - valgrind: under Valgrind.
+# - asan, ubsan, valgrind: check memory and undefined behaviour.
 # - coverage: measure code coverage and upload it to Coveralls.
-# Remove any entries that are not wanted.
 on:
   push:
     branches: [main, develop, test-github-actions]
@@ -26,8 +24,7 @@ jobs:
       matrix:
         # "flags" are extra arguments to Bazel.
         include:
-          # Debug builds on a selection of operating system and compiler
-          # combinations.
+          # Debug builds.
           - os: ubuntu-24.04
             compiler: gcc
             variant: debug
@@ -49,8 +46,7 @@ jobs:
           - os: windows-2025
             compiler: clang-cl
             variant: debug
-          # Optimised builds on a selection of operating system and compiler
-          # combinations.
+          # Optimised builds.
           - os: ubuntu-26.04
             compiler: gcc
             variant: optimised
@@ -76,8 +72,7 @@ jobs:
             compiler: gcc
             variant: valgrind
             flags: --run_under=valgrind
-          # Any differences between coverage on different operating systems
-          # are probably minor.
+          # Coverage.
           - os: ubuntu-26.04
             compiler: gcc
             variant: coverage
